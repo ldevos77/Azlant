@@ -1,4 +1,4 @@
-package org.ldevos77.azlant.controller;
+package org.ldevos77.azlant.portfolio;
 
 import java.util.Locale;
 
