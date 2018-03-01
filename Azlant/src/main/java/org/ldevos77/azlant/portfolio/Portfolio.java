@@ -7,37 +7,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
- * Entity implementation class for Entity: PortfolioEntity
+ * Entity implementation class for Entity: Portfolio
  *
  */
 @Entity
+@NamedQuery(name="Portfolio.findAll", query="SELECT p FROM Portfolio p")
+@Table(name="portfolio")
 public class Portfolio implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-
-	public Portfolio() {
-		super();
-		this.name="Not defined";
-	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="Id")
+	private long id;
 	
-	@NotNull
 	@Column(name="name")
 	private String name;
 
-	public int getId() {
+	public Portfolio() {
+		super();
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -47,6 +47,11 @@ public class Portfolio implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return "Portfolio [id=" + id + ", name=" + name + "]";
 	}
    
 }

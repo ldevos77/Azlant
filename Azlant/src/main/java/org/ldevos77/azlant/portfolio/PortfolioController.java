@@ -18,10 +18,14 @@ public class PortfolioController {
 	
 	@Autowired
 	private MessageSource messageSource;
+	
+	@Autowired
+	PortfolioDao portfolioDao;
 
 	@RequestMapping(value = "/portfolio", method = RequestMethod.GET)
 	public String portfolio(Locale locale, Model model) {
 		logger.info(messageSource.getMessage("controler.portfolio.log", null, locale));
+		model.addAttribute("portfolios", portfolioDao.getPortfolios());
 		return "portfolio";
 	}
 	
