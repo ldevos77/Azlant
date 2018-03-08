@@ -10,6 +10,30 @@
 		</layout>
 	</appender>
 	
+	<!-- Appenders -->
+	<appender name="genericFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="10MB" />
+		<param name="maxBackupIndex" value="5" />
+		<!-- For Tomcat -->
+		<param name="file" value="${catalina.base}/logs/Azlant.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- Appenders -->
+	<appender name="sqlFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="10MB" />
+		<param name="maxBackupIndex" value="5" />
+		<!-- For Tomcat -->
+		<param name="file" value="${catalina.base}/logs/AzlantSQL.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="org.ldevos77.azlant">
 		<level value="info" />
@@ -31,11 +55,17 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+	
+	<logger name="org.hibernate.SQL">
+		<level value="debug" />
+		<appender-ref ref="sqlFile" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
+		<appender-ref ref="genericFile" />
 	</root>
 	
 </log4j:configuration>

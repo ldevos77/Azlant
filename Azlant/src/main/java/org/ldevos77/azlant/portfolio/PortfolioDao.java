@@ -18,10 +18,14 @@ public class PortfolioDao {
 		entityManager.persist(portfolio);
 	}
 	
-	public List<Portfolio> getPortfolios() {
+	public List<Portfolio> findAll() {
 		TypedQuery<Portfolio> portfolioQuery = entityManager.createNamedQuery("Portfolio.findAll", Portfolio.class);
 		List<Portfolio> portfolios = portfolioQuery.getResultList();
 		return portfolios;
+	}
+	
+	public Portfolio findById(long id) {
+		return entityManager.find(Portfolio.class, id);
 	}
 
 }

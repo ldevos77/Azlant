@@ -1,14 +1,21 @@
 package org.ldevos77.azlant.portfolio;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
+import org.ldevos77.azlant.asset.Asset;
 
 /**
  * Entity implementation class for Entity: Portfolio
@@ -23,11 +30,22 @@ public class Portfolio implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Id")
+	@Column(name="id")
 	private long id;
 	
 	@Column(name="name")
 	private String name;
+	
+	/*
+	 * CascadeType : No Cascade
+	 * FetchType
+	 *   EAGER : Relation is loading in same time than the father entity 
+	 */
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="portfolio_asset",
+		      joinColumns = @JoinColumn(name="portfolio_id", referencedColumnName="id"),
+		      inverseJoinColumns = @JoinColumn(name="asset_id", referencedColumnName="id"))
+	private List<Asset> assets;
 
 	public Portfolio() {
 		super();
@@ -52,6 +70,14 @@ public class Portfolio implements Serializable {
 	@Override
 	public String toString() {
 		return "Portfolio [id=" + id + ", name=" + name + "]";
+	}
+
+	public List<Asset> getAssets() {
+		return assets;
+	}
+
+	public void setAssets(List<Asset> assets) {
+		this.assets = assets;
 	}
    
 }

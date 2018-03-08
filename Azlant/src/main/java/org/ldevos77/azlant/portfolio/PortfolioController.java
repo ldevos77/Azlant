@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,10 +23,18 @@ public class PortfolioController {
 	@Autowired
 	PortfolioDao portfolioDao;
 
-	@RequestMapping(value = "/portfolio", method = RequestMethod.GET)
-	public String portfolio(Locale locale, Model model) {
+	@RequestMapping(value = "/portfolio/list", method = RequestMethod.GET)
+	public String findAll(Locale locale, Model model) {
 		logger.info(messageSource.getMessage("controler.portfolio.log", null, locale));
-		model.addAttribute("portfolios", portfolioDao.getPortfolios());
+		model.addAttribute("portfolios", portfolioDao.findAll());
+		return "portfolios";
+	}
+	
+	@RequestMapping(value = "/portfolio/get/{id}", method = RequestMethod.GET)
+	public String getPortfolio(@PathVariable int id, Locale locale, Model model) {
+		logger.info(messageSource.getMessage("controler.portfolio.log", null, locale));
+		model.addAttribute("portfolio", portfolioDao.findById(id));
+		model.addAttribute("assets", portfolioDao.findById(id).getAssets());
 		return "portfolio";
 	}
 	

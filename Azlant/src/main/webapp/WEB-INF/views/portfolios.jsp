@@ -9,18 +9,18 @@
 </head>
 <body>
   <h1>Portfolios management</h1>
-  <h2>Portfolios : ${portfolio.name}</h2>
+  <h2>Portfolios :</h2>
   <table>
     <tr>
       <!-- id -->
       <td>Id</td>
       <!-- name -->
-  	  <td>Isin Code</td>
+  	  <td>Name</td>
   	</tr>
-  	<c:forEach items="${assets}" var="asset">
+  	<c:forEach items="${portfolios}" var="portfolio">
     <tr>
-      <td>${asset.id}</td>
-  	  <td>${asset.isinCode}</td>
+      <td>${portfolio.id}</td>
+  	  <td>${portfolio.name}</td>
   	</tr>
   	</c:forEach>
   </table>
