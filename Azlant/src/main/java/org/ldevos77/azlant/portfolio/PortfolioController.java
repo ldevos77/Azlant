@@ -27,14 +27,13 @@ public class PortfolioController {
 	public String findAll(Locale locale, Model model) {
 		logger.info(messageSource.getMessage("controler.portfolio.log", null, locale));
 		model.addAttribute("portfolios", portfolioDao.findAll());
-		return "portfolios";
+		return "portfolioList";
 	}
 	
 	@RequestMapping(value = "/portfolio/get/{id}", method = RequestMethod.GET)
 	public String getPortfolio(@PathVariable int id, Locale locale, Model model) {
 		logger.info(messageSource.getMessage("controler.portfolio.log", null, locale));
 		model.addAttribute("portfolio", portfolioDao.findById(id));
-		model.addAttribute("assets", portfolioDao.findById(id).getAssets());
 		return "portfolio";
 	}
 	

@@ -9,22 +9,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
-
-import org.ldevos77.azlant.asset.Asset;
 
 /**
  * Entity implementation class for Entity: Portfolio
  *
  */
 @Entity
-@NamedQuery(name="Portfolio.findAll", query="SELECT p FROM Portfolio p")
+@NamedQuery(name="PortfolioEntity.findAll", query="SELECT p FROM PortfolioEntity p")
 @Table(name="portfolio")
-public class Portfolio implements Serializable {
+public class PortfolioEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -41,13 +37,10 @@ public class Portfolio implements Serializable {
 	 * FetchType
 	 *   EAGER : Relation is loading in same time than the father entity 
 	 */
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="portfolio_asset",
-		      joinColumns = @JoinColumn(name="portfolio_id", referencedColumnName="id"),
-		      inverseJoinColumns = @JoinColumn(name="asset_id", referencedColumnName="id"))
-	private List<Asset> assets;
+	@OneToMany(mappedBy="portfolio", fetch=FetchType.EAGER)
+	private List<PortfolioLineEntity> portfolioLines;
 
-	public Portfolio() {
+	public PortfolioEntity() {
 		super();
 	}
 
@@ -72,12 +65,12 @@ public class Portfolio implements Serializable {
 		return "Portfolio [id=" + id + ", name=" + name + "]";
 	}
 
-	public List<Asset> getAssets() {
-		return assets;
+	public List<PortfolioLineEntity> getPortfolioLines() {
+		return portfolioLines;
 	}
 
-	public void setAssets(List<Asset> assets) {
-		this.assets = assets;
+	public void setPortfolioLines(List<PortfolioLineEntity> portfolioLines) {
+		this.portfolioLines = portfolioLines;
 	}
-   
+  
 }

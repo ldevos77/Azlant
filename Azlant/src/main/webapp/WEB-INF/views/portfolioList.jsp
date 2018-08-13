@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<title><spring:message code="view.portfolio.title" /></title>
-	<spring:url value="/resources/css/azlant.css" var="azlantCss" />
+	<c:url value="/resources/css/azlant.css" var="azlantCss" />
 	<link rel="stylesheet" href="${azlantCss}">
 </head>
 <body>
@@ -20,34 +20,21 @@
 	</ul>
 </nav>
 <section class="content">
-	<h1>Portfolio</h1>
-	<h2>Name : ${portfolio.name}</h2>
+	<h1>Portfolio list</h1>
 	<table>
 		<tr>
 			<!-- id -->
 			<td>Id</td>
-			<!-- Name -->
+			<!-- name -->
 			<td>Name</td>
-			<!-- Asset Class -->
-			<td>Asset Class</td>
-			<!-- ISIN Code -->
-			<td>ISIN Code</td>
-			<!-- quantity -->
-			<td>Quantity</td>
-			<!-- Purchase Price -->
-			<td>Purchase Price</td>
-			<!-- Trading Fees -->
-			<td>Trading Fees</td>
 		</tr>
-		<c:forEach items="${portfolio.portfolioLines}" var="portfolioLine">
+		<c:forEach items="${portfolios}" var="portfolio">
 		<tr>
-			<td>${portfolioLine.id}</td>
-			<td>${portfolioLine.asset.name}</td>
-			<td>${portfolioLine.asset.assetClass.name}</td>
-			<td>${portfolioLine.asset.isinCode}</td>
-			<td>${portfolioLine.quantity}</td>
-			<td>${portfolioLine.purchasePrice}</td>
-			<td>${portfolioLine.tradingFees}</td>
+			<td>${portfolio.id}</td>
+			<td>
+				<c:url value="/portfolio/get/${portfolio.id}" var="portfolioUrl" />
+				<a href="${portfolioUrl}">${portfolio.name}</a>
+			</td>
 		</tr>
 		</c:forEach>
 	</table>

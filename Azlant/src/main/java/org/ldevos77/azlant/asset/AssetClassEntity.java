@@ -10,12 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Entity implementation class for Entity: Asset
+ * Entity implementation class for Entity: AssetClass
  *
  */
 @Entity
-@Table(name="asset")
-public class Asset implements Serializable {
+@Table(name="asset_class")
+public class AssetClassEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,13 +24,10 @@ public class Asset implements Serializable {
 	@Column(name="id")
 	private long id;
 	
-	@Column(name="isin_code")
-	private String isinCode;
-	
-	//@ManyToOne
-	//private AssetType assetType;
+	@Column(name="name")
+	private String name;
 
-	public Asset() {
+	public AssetClassEntity() {
 		super();
 	}
 
@@ -42,12 +39,12 @@ public class Asset implements Serializable {
 		this.id = id;
 	}
 
-	public String getIsinCode() {
-		return isinCode;
+	public String getName() {
+		return name;
 	}
 
-	public void setIsinCode(String isinCode) {
-		this.isinCode = isinCode;
+	public void setName(String name) {
+		this.name = name;
 	}
    
 }
